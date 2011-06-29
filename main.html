@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script src="jquery-1.5.2.js"></script>
+        <title> Websockets </title>
+    </head>
+    <body>
+        <script>
+            $(document).ready(function(){
+                alert("Socket");
+                ws = new WebSocket("ws://localhost:8080/");
+                ws.onmessage = function(msg){
+                    $("#m").append("<div class='mm'>" + msg.data +"</div>");
+                }
+
+                $("#chatbox").keypress(function(event){
+                  if(event.keyCode != 13)
+                      return;
+
+                  var msg = $("#chatbox").val();
+                  ws.send(msg);
+
+                });
+
+            })
+        </script>
+        <h2> Socket this </h2>
+        <div id="m">
+            <div id='tbox'>
+                Enter chat :<input type="text" size="100" id='chatbox'/>
+            </div>
+
+        </div>
+    </body>
+
+</html>
